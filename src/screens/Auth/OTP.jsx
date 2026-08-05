@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -31,48 +31,51 @@ export default function OTP() {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
-            <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center' }}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 10, borderRadius: 10 }}>
-                    <FontAwesome6 name="arrow-left" size={24} color="white" />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+
+            <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+                <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center' }}>
+                    <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 10, borderRadius: 10 }}>
+                        <FontAwesome6 name="arrow-left" size={24} color="white" />
+                    </TouchableOpacity>
+
+                </View>
+
+
+                <View style={{ padding: 10, marginTop: 90 }}>
+
+                    <Text style={styles.title}>Confirm OTP code</Text>
+
+                    {/* Subtitle */}
+                    <Text style={styles.subtitle}>
+                        You just need to enter the OTP sent to the registered phone number (704) 555-0127.
+                    </Text>
+
+                    {/* OTP Input Component */}
+                    <View style={styles.otpWrapper}>
+                        <OTPTextInput
+                            ref={otpInputRef}
+                            inputCount={6}
+                            handleTextChange={(text) => setOtp(text)}
+                            tintColor="#EFA636"
+                            offTintColor="#EFA636"
+                            textInputStyle={styles.otpBox}
+                            containerStyle={styles.otpContainer}
+                        />
+                    </View>
+
+                    {/* Timer */}
+                    <View style={styles.timerContainer}>
+                        <Text style={styles.timerText}>{formatTime(timer)}</Text>
+                    </View>
+                </View>
+
+                <TouchableOpacity disabled={isOtpComplete} onPress={() => navigation.navigate('username')} style={{ width: '100%', backgroundColor: isOtpComplete ? '#584e35' : '#FCC434', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16 }}>
+                    <Text style={{ color: '#030303', fontWeight: 'bold', fontSize: 20 }}>Continue</Text>
                 </TouchableOpacity>
 
-            </View>
-
-
-            <View style={{ padding: 10, marginTop: 90 }}>
-
-                <Text style={styles.title}>Confirm OTP code</Text>
-
-                {/* Subtitle */}
-                <Text style={styles.subtitle}>
-                    You just need to enter the OTP sent to the registered phone number (704) 555-0127.
-                </Text>
-
-                {/* OTP Input Component */}
-                <View style={styles.otpWrapper}>
-                    <OTPTextInput
-                        ref={otpInputRef}
-                        inputCount={6}
-                        handleTextChange={(text) => setOtp(text)}
-                        tintColor="#EFA636"
-                        offTintColor="#EFA636"
-                        textInputStyle={styles.otpBox}
-                        containerStyle={styles.otpContainer}
-                    />
-                </View>
-
-                {/* Timer */}
-                <View style={styles.timerContainer}>
-                    <Text style={styles.timerText}>{formatTime(timer)}</Text>
-                </View>
-            </View>
-
-            <TouchableOpacity disabled={isOtpComplete} onPress={()=> navigation.navigate('username')}  style={{ width: '100%', backgroundColor: '#FCC434', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16 }}>
-                <Text style={{ color: '#030303', fontWeight: 'bold', fontSize: 20 }}>Continue</Text>
-            </TouchableOpacity>
-
-        </SafeAreaView>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -84,8 +87,8 @@ const styles = StyleSheet.create({
         paddingTop: 40,
     },
     title: {
-        fontSize: 28,
-        fontWeight: 'bold',
+        fontSize: 32,
+        fontWeight: '800',
         color: '#EFA636',
         marginBottom: 16,
     },
