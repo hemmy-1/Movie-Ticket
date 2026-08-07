@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import Button from '../../component/Button';
 
 
 export default function Username() {
@@ -11,7 +12,21 @@ export default function Username() {
   const [username, setUsername] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
-  const isUsernameCom = username.length < 5;
+  const isUsernameIncomplete = username.length < 5;
+  // <Button
+  //   title="Continue"
+  //   disabled={isUsernameIncomplete}
+  //   onPress={handleContinue}
+  // />
+
+  const handleContinue = () => {
+    if(isUsernameIncomplete) return;
+
+    navigation.navigate('tab', {
+      screen: 'Home', 
+      params: { UserName: username },
+    });
+  }
 
 
   return (
@@ -50,11 +65,9 @@ export default function Username() {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}>
 
-            <TouchableOpacity  
-            onPress={() => navigation.navigate('tab', username)} 
-            style={{ width: '100%', backgroundColor: isUsernameCom ? '#584e35' : '#FCC434', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16 }}>
-              <Text style={{ color: '#030303', fontWeight: 'bold', fontSize: 20 }}>Continue</Text>
-            </TouchableOpacity>
+            
+          <Button disabled={isUsernameIncomplete} onPress={handleContinue} />
+
           </KeyboardAvoidingView>
         
 
