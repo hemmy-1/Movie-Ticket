@@ -34,7 +34,7 @@ export default function OTP() {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
-            <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#120202' }}>
                 <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center' }}>
                     <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 10, borderRadius: 10 }}>
                         <FontAwesome6 name="arrow-left" size={24} color="white" />

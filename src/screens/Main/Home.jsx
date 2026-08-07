@@ -151,7 +151,7 @@ export default function Home({ route }) {
 
   const { UserName } = route.params
   return (
-    <SafeAreaView style={{ backgroundColor: 'black', flex: 1, padding: 10 }}>
+    <SafeAreaView style={{ backgroundColor: '#120202', flex: 1, padding: 10 }}>
       <ScrollView>
 
         <View style={{ gap: 30 }}>
@@ -224,6 +224,7 @@ export default function Home({ route }) {
                       marginHorizontal: 10,
                       transform: [{ scale }],
                       opacity,
+                      marginTop:20
                     },
                   ]}
                 >
@@ -371,8 +372,7 @@ export default function Home({ route }) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#120202',
     paddingTop: 40,
   },
   header: {

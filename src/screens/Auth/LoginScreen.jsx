@@ -29,7 +29,7 @@ export default function LoginScreen() {
 
 
   return (
-    <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: '#120202', flex: 1 }}>
 
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 10, paddingRight: 30 }}>
 
