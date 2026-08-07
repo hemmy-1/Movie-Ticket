@@ -10,6 +10,12 @@ import movie4 from "../assets/movie4.png";
 import movie5 from "../assets/movie5.png";
 import discount from "../assets/discount.png";
 import layer from "../assets/layer.png";
+import ser1 from "../assets/ser1.png";
+import ser2 from "../assets/ser2.png";
+import ser3 from "../assets/ser3.png";
+import ser4 from "../assets/ser4.png";
+import bat from "../assets/bat.png";
+import bat1 from "../assets/bat1.png";
 
 
 const images = {
@@ -23,7 +29,13 @@ const images = {
   movie4,
   movie5,
   discount,
-  layer
+  layer,
+  ser1,
+  ser2,
+  ser3,
+  ser4,
+  bat1,
+  bat,
   
 
 };

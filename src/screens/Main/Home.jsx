@@ -70,6 +70,60 @@ const COMING_SOON_MOVIES = [
   },
 ];
 
+const ServiceImg = [
+  {
+    id: '1',
+    img: images.ser1,
+    name: 'Retal'
+  },
+  {
+    id: '2',
+    img: images.ser2,
+    name: 'Imax'
+  },
+  {
+    id: '3',
+    img: images.ser3,
+    name: '4DX'
+  },
+  {
+    id: '4',
+    img: images.ser4,
+    name: 'Sweetbox'
+  },
+]
+const Service = ({ item }) => {
+  return (
+    <View style={{ alignItems: 'center', gap: 20, paddingHorizontal: 20, marginTop: 20 }}>
+      <Image source={item.img} />
+      <Text style={{ color: 'white' }}>{item.name}</Text>
+    </View>
+  )
+}
+
+const MNews = [
+  {
+    id: '1',
+    news: 'When The Batman 2 Starts \nFilming Reportedly Revealed',
+    img: images.bat
+  },
+  {
+    id: '2',
+    news: '6 Epic Hulk Fights That Can Happen In The MCU Future ',
+    img: images.bat1
+  },
+]
+
+const MovieN = ({item}) => {
+  return(
+    <View style={{height:186, width:239, paddingHorizontal:10, marginRight:20, marginTop:10, gap:10}}>
+      <Image style={{height:135}} source={item.img}/>
+      <Text style={{fontSize:16, fontWeight:'500', color:'white'}}>{item.news}</Text>
+
+    </View>
+  )
+}
+
 export default function Home({ route }) {
   const { width } = useWindowDimensions();
   const ITEM_WIDTH = width * 0.72;
@@ -230,8 +284,9 @@ export default function Home({ route }) {
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4, gap: 6, }}>
 
                   <MaterialCommunityIcons name="video-outline" size={16} color="#AAA" />
-                  numberOfLines={1}
-                  <Text style={{ color: '#AAA', fontSize: 12, flex: 1 }}
+                  <Text
+                    numberOfLines={1}
+                    style={{ color: '#AAA', fontSize: 12, flex: 1 }}
                   >{item.genre}</Text>
                 </View>
                 <View
@@ -255,15 +310,15 @@ export default function Home({ route }) {
 
           <ImageBackground resizeMode='contain'
             source={images.discount}
-            style={{ height: 268, width: '97%', alignSelf: 'center', borderRadius:20}}>
+            style={{ height: 268, width: '97%', alignSelf: 'center', borderRadius: 20 }}>
 
-            <View style={{ alignSelf: 'flex-end', position:'relative', right:40, top:30 }}>
+            <View style={{ alignSelf: 'flex-end', position: 'relative', right: 40, top: 30 }}>
 
-              <View style={{ height: 100, width: 133,alignItems:'flex-end' }}>
+              <View style={{ height: 100, width: 133, alignItems: 'flex-end' }}>
                 <Image source={images.layer} />
 
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Text style={{ fontSize: 83, color: 'white', fontWeight:'900'}}>30</Text>
+                  <Text style={{ fontSize: 83, color: 'white', fontWeight: '900' }}>30</Text>
                   <View>
                     <Text style={{ fontSize: 47, color: 'white' }}>%</Text>
                     <Text style={{ fontSize: 22, color: 'white', marginTop: -10 }}>OFF</Text>
@@ -271,13 +326,36 @@ export default function Home({ route }) {
 
                 </View>
                 <Text style={{ fontSize: 14, color: 'white', marginTop: -10 }}>Movie Voucher free</Text>
-
               </View>
-
             </View>
-
-
           </ImageBackground>
+        </View>
+
+        <View style={{ marginTop: 20, }}>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Service</Text>
+            <Text style={styles.seeAll}>See all ›</Text>
+          </View>
+
+          <FlatList
+            data={ServiceImg}
+            keyExtractor={(item) => item.id}
+            renderItem={Service}
+            horizontal />
+        </View>
+
+        <View style={{ marginTop: 20, }}>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Movie news</Text>
+            <Text style={styles.seeAll}>See all ›</Text>
+          </View>
+
+          <FlatList
+          data={MNews}
+          keyExtractor={(item) => item.id}
+          renderItem={MovieN}
+          horizontal
+          />
 
 
         </View>
