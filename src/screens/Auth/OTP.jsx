@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import React, { useState, useRef, useEffect } from 'react';
 import OTPTextInput from 'react-native-otp-textinput';
+import Button from '../../component/Button';
 
 
 
@@ -70,9 +71,16 @@ export default function OTP() {
                     </View>
                 </View>
 
-                <TouchableOpacity disabled={isOtpComplete} onPress={() => navigation.navigate('username')} style={{ width: '100%', backgroundColor: isOtpComplete ? '#584e35' : '#FCC434', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16 }}>
-                    <Text style={{ color: '#030303', fontWeight: 'bold', fontSize: 20 }}>Continue</Text>
-                </TouchableOpacity>
+                
+
+                <KeyboardAvoidingView
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    style={{flex:1, justifyContent:'flex-end'}}
+                    >
+                    
+                    <Button disabled={isOtpComplete} onPress={() => navigation.navigate('username')}/>
+
+                </KeyboardAvoidingView>
 
             </SafeAreaView>
         </TouchableWithoutFeedback>
