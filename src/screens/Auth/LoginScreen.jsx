@@ -5,12 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import images from '../../Constant/images';
+import Button from '../../component/Button';
 
 
 
 export default function LoginScreen() {
   const navigation = useNavigation();
- 
+
 
   const bottomSheetRef = useRef(null);
   const snapPoint = useMemo(() => ['20%', '50%'], []);
@@ -33,7 +34,7 @@ export default function LoginScreen() {
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 10, paddingRight: 30 }}>
 
         <Image style={{ height: 70, width: 200 }} source={images.logo} />
-        <TouchableOpacity onPress={openModal} style={{ backgroundColor: 'black', borderRadius: 20, borderWidth: 2, borderColor: 'white', height: 40,  flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingHorizontal:10 }}>
+        <TouchableOpacity onPress={openModal} style={{ backgroundColor: 'black', borderRadius: 20, borderWidth: 2, borderColor: 'white', height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 10 }}>
           <Ionicons name="language-outline" size={24} color="white" />
           <Text style={{ color: 'white' }}> {selected === 'English' ? 'English' : 'Vietnamese'}</Text>
 
@@ -60,17 +61,11 @@ export default function LoginScreen() {
       </View>
 
       <View style={{ flex: 1, justifyContent: 'flex-end', height: 186, width: '97%', alignItems: 'center', gap: 20, marginBottom: 30 }}>
-        <TouchableOpacity onPress={()=> navigation.navigate('Signup')} style={{ paddingHorizontal: "40%", backgroundColor: '#FCC434', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16 }}>
-          <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 20 }}>
-            Sign in
-          </Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity style={{ paddingHorizontal: "40%", backgroundColor: 'black', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16, borderWidth: 2, borderColor: 'white' }}>
-          <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 20 }}>
-            Sign up
-          </Text>
-        </TouchableOpacity>
+
+        <Button title='Sign in' onPress={()=> navigation.navigate('Signup')} />
+        <Button title='Sign up' style={{ backgroundColor: 'black', borderWidth: 2, borderColor: 'white' }} textStyle={{ color: 'white' }} />
+
 
 
         <Text style={{ color: '#ffffff', fontSize: 15, textAlign: 'center' }}>
@@ -83,41 +78,38 @@ export default function LoginScreen() {
         transparent={true}
         animationType='slide'
       >
-        <View style={{flex:1, justifyContent:'flex-end'}}>
-          <View style={{height:400, width:'100%', backgroundColor:'#5b5656', borderRadius:40, padding:20}}>
-            <Text style={{color:'white', fontSize:35, fontWeight:'900'}}>Choose Language</Text>
+        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+          <View style={{ height: 400, width: '100%', backgroundColor: '#5b5656', borderRadius: 40, padding: 20 }}>
+            <Text style={{ color: 'white', fontSize: 35, fontWeight: '900' }}>Choose Language</Text>
             <Text style={{ color: 'white', fontSize: 15 }}>Which language do you want to use?</Text>
 
-            <View style={{marginTop:20, gap:10}}>
+            <View style={{ marginTop: 20, gap: 10 }}>
 
-              <TouchableOpacity onPress={() => setSelected('English')} style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-                <Text style={{ color: selected === 'English'? '#FCC434' : 'white', fontSize: 25, fontWeight: '800' }}>
+              <TouchableOpacity onPress={() => setSelected('English')} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Text style={{ color: selected === 'English' ? '#FCC434' : 'white', fontSize: 25, fontWeight: '800' }}>
                   English
                 </Text>
                 <Ionicons name={selected === 'English' ? "radio-button-on" : "radio-button-off"} size={34} color={selected === 'English' ? "#FCC434" : "#fff"} />
               </TouchableOpacity>
 
-              <View style={{borderWidth:1, borderColor:'#888' }}/>
+              <View style={{ borderWidth: 1, borderColor: '#888' }} />
 
-              <TouchableOpacity onPress={() => setSelected('Vietnamese')} style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+              <TouchableOpacity onPress={() => setSelected('Vietnamese')} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Text style={{ color: selected === 'Vietnamese' ? '#FCC434' : 'white', fontSize: 25, fontWeight: '800' }}>
                   Vietnamese
                 </Text>
-                <Ionicons name={selected === 'Vietnamese' ? "radio-button-on" : "radio-button-off"} size={34} color={selected === 'Vietnamese' ? "#FCC434" : "#fff" } />
+                <Ionicons name={selected === 'Vietnamese' ? "radio-button-on" : "radio-button-off"} size={34} color={selected === 'Vietnamese' ? "#FCC434" : "#fff"} />
               </TouchableOpacity>
             </View>
 
-            <View style={{flex:1, justifyContent:'flex-end', alignItems:'center'}}>
+            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+              <Button onPress={closeModal} title={selected === 'English' ? ' use English' : 'use Vietnamese'} />
 
-              <TouchableOpacity onPress={closeModal} style={{ width:'100%', backgroundColor: '#FCC434', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16 }}>
-                <Text style={{ color: '#030303', fontWeight: 'bold', fontSize: 20 }}>
-                  use {selected === 'English' ? 'English' : 'Vietnamese'}
-                </Text>
-              </TouchableOpacity>
+
 
 
             </View>
-            
+
 
 
 

@@ -5,6 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import images from '../../Constant/images';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import Button from '../../component/Button';
 
 export default function SignUp() {
   const navigation = useNavigation();
@@ -42,9 +43,8 @@ export default function SignUp() {
 
           <View style={{ borderWidth: 1, borderColor: '#888', marginTop: -35 }} />
 
-          <TouchableOpacity disabled={isNumComplete} onPress={() => navigation.navigate('otp')} style={{ width: '100%', backgroundColor: isNumComplete ? '#584d31' : '#FCC434', borderRadius: 40, justifyContent: 'center', alignItems: 'center', paddingVertical: 16 }}>
-            <Text style={{ color: '#030303', fontWeight: 'bold', fontSize: 20 }}>Continue</Text>
-          </TouchableOpacity>
+          
+          <Button disabled={isNumComplete} onPress={() => navigation.navigate('otp')}  />
         </View>
 
         <View style={{ flex: 1, justifyContent: 'flex-end', padding: 10, alignItems: 'center', gap: 20 }}>

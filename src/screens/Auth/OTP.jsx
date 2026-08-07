@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
+=======
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
+>>>>>>> 0127e38d083332c2bca2fb2f319a8fa0f60d7648
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
@@ -71,6 +75,7 @@ export default function OTP() {
                     </View>
                 </View>
 
+<<<<<<< HEAD
                 
 
                 <KeyboardAvoidingView
@@ -81,6 +86,11 @@ export default function OTP() {
                     <Button disabled={isOtpComplete} onPress={() => navigation.navigate('username')}/>
 
                 </KeyboardAvoidingView>
+=======
+
+
+                <Button disabled={isOtpComplete} onPress={() => navigation.navigate('username')} />
+>>>>>>> 0127e38d083332c2bca2fb2f319a8fa0f60d7648
 
             </SafeAreaView>
         </TouchableWithoutFeedback>
