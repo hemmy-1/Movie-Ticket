@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 import images from '../../Constant/images';
 
@@ -16,6 +17,11 @@ const MOVIES = [
     rating: '4.8',
     reviews: '1.222',
     img: images.movie1,
+    img2: images.movie6,
+    screen: 'MovieD',
+    date: '12.09.2026',
+    language: 'English',
+    censorship: '13+'
   },
   {
     id: '2',
@@ -25,6 +31,10 @@ const MOVIES = [
     rating: '4.9',
     reviews: '2.450',
     img: images.movie1,
+    screen: 'MovieD',
+    date: '12.09.2026',
+    language: 'English',
+    censorship: '13+'
   },
   {
     id: '3',
@@ -34,6 +44,10 @@ const MOVIES = [
     rating: '4.9',
     reviews: '2.450',
     img: images.movie1,
+    date: '12.09.2026',
+    screen: 'MovieD',
+    language: 'English',
+    censorship: '13+'
   },
   {
     id: '4',
@@ -43,6 +57,10 @@ const MOVIES = [
     rating: '4.9',
     reviews: '2.450',
     img: images.movie1,
+    screen: 'MovieD',
+    date: '12.09.2026',
+    language: 'English',
+    censorship: '13+'
   },
 ];
 
@@ -114,17 +132,19 @@ const MNews = [
   },
 ]
 
-const MovieN = ({item}) => {
-  return(
-    <View style={{height:186, width:239, paddingHorizontal:10, marginRight:20, marginTop:10, gap:10}}>
-      <Image style={{height:135}} source={item.img}/>
-      <Text style={{fontSize:16, fontWeight:'500', color:'white'}}>{item.news}</Text>
+const MovieN = ({ item }) => {
+  return (
+    <View style={{ height: 186, width: 239, paddingHorizontal: 10, marginRight: 20, marginTop: 10, gap: 10 }}>
+      <Image style={{ height: 135 }} source={item.img} />
+      <Text style={{ fontSize: 16, fontWeight: '500', color: 'white' }}>{item.news}</Text>
 
     </View>
   )
 }
 
 export default function Home({ route }) {
+  const navigation = useNavigation();
+
   const { width } = useWindowDimensions();
   const ITEM_WIDTH = width * 0.72;
   const ITEM_MARGIN = 10;
@@ -149,7 +169,7 @@ export default function Home({ route }) {
     }
   );
 
-  const { UserName } = route.params
+  const { UserName } = route.params || {}
   return (
     <SafeAreaView style={{ backgroundColor: '#120202', flex: 1, padding: 10 }}>
       <ScrollView>
@@ -216,31 +236,42 @@ export default function Home({ route }) {
               });
 
               return (
-                <Animated.View
-                  style={[
-                    styles.cardContainer,
-                    {
-                      width: ITEM_WIDTH,
-                      marginHorizontal: 10,
-                      transform: [{ scale }],
-                      opacity,
-                      marginTop:20
-                    },
-                  ]}
-                >
-                  <Image source={item.img} style={styles.poster} />
+                <TouchableOpacity
+                  onPress={() => {
+                    if (item.screen) {
+                      navigation.navigate(item.screen, { MOVIES: item })
 
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.subtitle}>
-                    {item.duration} • {item.genre}
-                  </Text>
+                    } else {
+                      alert('Coming soon');
+                    }
+                  }}>
 
-                  <View style={styles.ratingRow}>
-                    <FontAwesome name="star" size={16} color="#FCC434" />
-                    <Text style={styles.ratingText}>{item.rating}</Text>
-                    <Text style={styles.reviewText}>({item.reviews})</Text>
-                  </View>
-                </Animated.View>
+                  <Animated.View
+                    style={[
+                      styles.cardContainer,
+                      {
+                        width: ITEM_WIDTH,
+                        marginHorizontal: 10,
+                        transform: [{ scale }],
+                        opacity,
+                        marginTop: 20
+                      },
+                    ]}
+                  >
+                    <Image source={item.img} style={styles.poster} />
+
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.subtitle}>
+                      {item.duration} • {item.genre}
+                    </Text>
+
+                    <View style={styles.ratingRow}>
+                      <FontAwesome name="star" size={16} color="#FCC434" />
+                      <Text style={styles.ratingText}>{item.rating}</Text>
+                      <Text style={styles.reviewText}>({item.reviews})</Text>
+                    </View>
+                  </Animated.View>
+                </TouchableOpacity>
               );
             }}
           />
@@ -352,10 +383,10 @@ export default function Home({ route }) {
           </View>
 
           <FlatList
-          data={MNews}
-          keyExtractor={(item) => item.id}
-          renderItem={MovieN}
-          horizontal
+            data={MNews}
+            keyExtractor={(item) => item.id}
+            renderItem={MovieN}
+            horizontal
           />
 
 

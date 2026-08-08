@@ -13,8 +13,6 @@ export default function LoginScreen() {
   const navigation = useNavigation();
 
 
-  const bottomSheetRef = useRef(null);
-  const snapPoint = useMemo(() => ['20%', '50%'], []);
 
   const handleOpenPress = () => bottomSheetRef.current?.expand();
   const handleClosePress = () => bottomSheetRef.current?.close();
@@ -63,8 +61,8 @@ export default function LoginScreen() {
       <View style={{ flex: 1, justifyContent: 'flex-end', height: 186, width: '97%', alignItems: 'center', gap: 20, marginBottom: 30 }}>
 
 
-        <Button title='Sign in' onPress={()=> navigation.navigate('Signup')} />
-        <Button title='Sign up' style={{ backgroundColor: 'black', borderWidth: 2, borderColor: 'white' }} textStyle={{ color: 'white' }} />
+        <Button title='Sign in' onPress={()=> navigation.navigate('tab')} />
+        <Button onPress={() => navigation.navigate('Signup')} title='Sign up' style={{ backgroundColor: 'black', borderWidth: 2, borderColor: 'white' }} textStyle={{ color: 'white' }} />
 
 
 
