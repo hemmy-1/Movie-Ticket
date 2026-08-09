@@ -25,6 +25,7 @@ import actor3 from "../assets/actor3.png";
 import actor4 from "../assets/actor4.png";
 import logo1 from "../assets/logo1.png";
 import logo2 from "../assets/logo2.png";
+import lamp from "../assets/lamp.png";
 
 
 const images = {
@@ -54,6 +55,7 @@ const images = {
   actor4,
   logo1,
   logo2,
+  lamp
   
 
 };
