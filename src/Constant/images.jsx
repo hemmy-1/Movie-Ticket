@@ -18,6 +18,13 @@ import ser4 from "../assets/ser4.png";
 import bat from "../assets/bat.png";
 import bat1 from "../assets/bat1.png";
 import stars from "../assets/stars.png";
+import actor from "../assets/actor.png";
+import actor1 from "../assets/actor1.png";
+import actor2 from "../assets/actor2.png";
+import actor3 from "../assets/actor3.png";
+import actor4 from "../assets/actor4.png";
+import logo1 from "../assets/logo1.png";
+import logo2 from "../assets/logo2.png";
 
 
 const images = {
@@ -40,6 +47,13 @@ const images = {
   bat1,
   bat,
   stars,
+  actor,
+  actor1,
+  actor2,
+  actor3,
+  actor4,
+  logo1,
+  logo2,
   
 
 };
