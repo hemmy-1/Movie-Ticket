@@ -13,6 +13,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import images from '../../Constant/images';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PAYMENT_METHODS = [
     {
@@ -69,6 +70,25 @@ export default function PaymentScreen({ route }) {
     const formattedSeats = bookingData?.seats?.length
         ? bookingData.seats.join(', ')
         : 'None';
+
+
+
+    const handlePaymentSuccess = async () => {
+        try {
+            const existingTicketsRaw = await AsyncStorage.getItem('@my_tickets');
+            const existingTickets = existingTicketsRaw ? JSON.parse(existingTicketsRaw) : [];
+
+            // Prepend new ticket
+            const updatedTickets = [bookingData, ...existingTickets];
+
+            await AsyncStorage.setItem('@my_tickets', JSON.stringify(updatedTickets));
+
+            // Navigate to Ticket Screen
+            navigation.navigate('TicketScreen');
+        } catch (error) {
+            console.error('Failed to save ticket:', error);
+        }
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -173,7 +193,7 @@ export default function PaymentScreen({ route }) {
                             <TouchableOpacity
                                 key={method.id}
                                 activeOpacity={0.8}
-                                onPress={() => setSelectedMethod(method.id)}
+                                onPress={() => { handleCompletePayment }}
                                 style={[
                                     styles.methodCard,
                                     isSelected && styles.selectedMethodCard,
@@ -204,13 +224,13 @@ export default function PaymentScreen({ route }) {
                         <Text style={styles.timerCount}>{formatTimer(timeLeft)}</Text>
                     </View>
 
-                    
+
                     <TouchableOpacity activeOpacity={0.8} style={styles.continueBtn}>
                         <Text style={styles.continueBtnText}>Continue</Text>
                     </TouchableOpacity>
                 </View>
 
-                
+
             </ScrollView>
         </SafeAreaView>
     );
@@ -354,7 +374,7 @@ const styles = StyleSheet.create({
     methodsContainer: {
         gap: 12,
         marginBottom: 24,
-        
+
     },
     methodCard: {
         backgroundColor: '#1C1C1E',
