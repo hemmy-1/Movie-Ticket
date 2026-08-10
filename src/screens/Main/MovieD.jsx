@@ -10,6 +10,7 @@ import Button from '../../component/Button';
 
 
 export default function MovieD({ route }) {
+    const { MOVIES } = route.params
     const navigation = useNavigation();
     const [isExpanded, setIsExpanded] = useState(false);
     const [selectedCinema, setSelectedCinema] = useState('1');
@@ -17,7 +18,6 @@ export default function MovieD({ route }) {
     const storylineText =
         "The analysis of the story structure in Avengers: Infinity War highlights how the film pulls off the immense challenge of juggling a massive ensemble cast and five separate Infinity Stone quests. While traditional films focus on a clear protagonist from Earth, structuralists and screenwriters often evaluate this film by making Thanos the central protagonist and main driver of the plot. The narrative cleverly intercuts multiple secondary character storylines—such as Iron Man, Thor, and Scarlet Witch—against Thanos's singular, relentless goal to reshape reality and save the universe from resource depletion.";
 
-    const { MOVIES } = route.params
 
     const DIRECTORS = [
         {
@@ -273,7 +273,7 @@ export default function MovieD({ route }) {
                         })}
                     </View>
 
-                    <Button onPress={()=> navigation.navigate('seat')}/>
+                    <Button onPress={()=> navigation.navigate('seat', {MOVIES})}/>
 
                 </View>
             </View>
