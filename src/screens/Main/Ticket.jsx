@@ -2,9 +2,44 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-import TicketCard from './TicketCard'; // Import the component
+
+const STORAGE_KEY = '@my_tickets';
+
+const getLocalStorageItem = async (key) => {
+  if (typeof localStorage === 'undefined' || localStorage === null) return null;
+  return localStorage.getItem(key);
+};
+
+const TicketCard = ({ ticket }) => {
+  const seats = ticket?.seats?.length ? ticket.seats.join(', ') : 'No seats selected';
+  const price = ticket?.totalPrice ? `${ticket.totalPrice.toLocaleString('vi-VN')} VND` : '0 VND';
+
+  return (
+    <View style={styles.ticketCard}>
+      <View style={styles.ticketHeader}>
+        <Text style={styles.ticketTitle}>{ticket?.movie?.title || 'Movie Ticket'}</Text>
+        <Text style={styles.orderText}>Order ID: {ticket?.orderId || '-'}</Text>
+      </View>
+      <View style={styles.ticketRow}>
+        <Text style={styles.label}>Date</Text>
+        <Text style={styles.value}>{ticket?.date || '-'}</Text>
+      </View>
+      <View style={styles.ticketRow}>
+        <Text style={styles.label}>Time</Text>
+        <Text style={styles.value}>{ticket?.time || '-'}</Text>
+      </View>
+      <View style={styles.ticketRow}>
+        <Text style={styles.label}>Seats</Text>
+        <Text style={styles.value}>{seats}</Text>
+      </View>
+      <View style={styles.ticketRow}>
+        <Text style={styles.label}>Total</Text>
+        <Text style={styles.value}>{price}</Text>
+      </View>
+    </View>
+  );
+};
 
 export default function Ticket({ navigation }) {
   const [tickets, setTickets] = useState([]);
@@ -13,7 +48,7 @@ export default function Ticket({ navigation }) {
     useCallback(() => {
       const loadTickets = async () => {
         try {
-          const storedTickets = await AsyncStorage.getItem('@my_tickets');
+          const storedTickets = await getLocalStorageItem(STORAGE_KEY);
           if (storedTickets) {
             setTickets(JSON.parse(storedTickets));
           }
@@ -21,6 +56,7 @@ export default function Ticket({ navigation }) {
           console.error(e);
         }
       };
+
       loadTickets();
     }, [])
   );
@@ -28,7 +64,7 @@ export default function Ticket({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <FontAwesome6 name="arrow-left" size={20} color="white" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My ticket</Text>
@@ -60,13 +96,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
   },
+  backButton: {
+    padding: 8,
+  },
   headerTitle: {
     color: '#FFF',
     fontSize: 22,
     fontWeight: 'bold',
     flex: 1,
     textAlign: 'center',
-    marginRight: 20,
+    marginRight: 28,
   },
   scrollContent: {
     padding: 20,
@@ -79,5 +118,38 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 40,
     fontSize: 16,
+  },
+  ticketCard: {
+    backgroundColor: '#1C1C1E',
+    borderRadius: 16,
+    padding: 16,
+  },
+  ticketHeader: {
+    marginBottom: 14,
+  },
+  ticketTitle: {
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 6,
+  },
+  orderText: {
+    color: '#8E8E93',
+    fontSize: 12,
+  },
+  ticketRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  label: {
+    color: '#BBB',
+    fontSize: 14,
+  },
+  value: {
+    color: '#FFF',
+    fontSize: 14,
+    flexShrink: 1,
+    textAlign: 'right',
   },
 });
