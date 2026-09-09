@@ -425,6 +425,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     width: '65%',
     alignItems: 'center',
+    marginLeft:-10
   },
   poster: {
     width: '100%',
